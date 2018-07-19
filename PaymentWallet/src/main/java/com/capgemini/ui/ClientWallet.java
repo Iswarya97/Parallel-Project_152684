@@ -8,14 +8,13 @@ import com.capgemini.service.PaymentWalletService;
 import com.capgemini.service.PaymentWalletValidate;
 
 public class ClientWallet {
+	static boolean a;
 	static boolean b;
 
 	public static void main(String[] args) {
 		int choice = 0;
 		int amount = 0;
-		PaymentWalletService service = new PaymentWalletService();
-		PaymentWalletValidate validate = new PaymentWalletValidate();
-		Account account = new Account();
+		
 
 		do {
 			int choice1;
@@ -30,7 +29,9 @@ public class ClientWallet {
 			switch (choice) {
 			case 1:
 				Customer wallet = new Customer();
-
+				PaymentWalletService service = new PaymentWalletService();
+				PaymentWalletValidate validate = new PaymentWalletValidate();
+				Account account = new Account();
 				Scanner sc = new Scanner(System.in);
 
 				System.out.println("Enter your UserName ");
@@ -72,13 +73,13 @@ public class ClientWallet {
 					wallet.setAmount(amount);
                      account.setCus(wallet);
                      if (isValidphoneNumber&& isValidemail && isValidage) {
-					b = service.addCustomerDetails(account);
+					a = service.addCustomerDetails(account);
                      }
                      else
                      {
                     	 System.out.println("invalid");
                      }
-					if (b) {
+					if (a) {
 
 						System.out.println("ACCOUNT CREATED SUCCESSFULLY... Account No is: " + accountNumber);
 						System.out.println("UserName is: " + userName);
@@ -164,12 +165,17 @@ public class ClientWallet {
 							break;
 
 						case 4:
-							PaymentWalletService service5 = new PaymentWalletService();
+							
 							Scanner scn = new Scanner(System.in);
 							System.out.println(" Enter Account Number to transfer amount");
 							accountNumber = s.nextInt();
+							
+							
 							System.out.println("Enter Amount to Transfer");
 							amount = scn.nextInt();
+							scn.nextLine();
+							PaymentWalletService service5 = new PaymentWalletService();
+							System.out.println("Fund transfer");
 							boolean b1 = service5.fundTransfer(accountNumber, amount);
 							if (b1) {
 								System.out.println("FUND TRANSFERED SUCCESSFULLY");
@@ -190,7 +196,7 @@ public class ClientWallet {
 
 						}
 
-					} while (choice1 != 7);
+					} while (choice1 != 6);
 
 			}
 			else

@@ -2,7 +2,10 @@ package com.capgemini.dao;
 
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import com.capgemini.bean.Account;
 import com.capgemini.bean.Customer;
 
@@ -11,7 +14,7 @@ import com.capgemini.bean.Customer;
 		static HashMap<String, Account> map1 = new HashMap<String, Account>();
 
 		
-		
+		static List<String> trans =new ArrayList<String>();
 		 static Account acc1;
 
 		public boolean loginAccount(String userName, String password) {
@@ -50,7 +53,10 @@ import com.capgemini.bean.Customer;
 		public boolean depositAmount(float amount) {
 			
 	        acc1.setBalance(acc1.getBalance()+amount);
+	        System.out.println(acc1.getBalance());
 			System.out.println(map1);
+			String dep = "The amount" +amount+"deposited successfully";
+			trans.add(dep);
 			return true;
 		}
 
@@ -72,13 +78,19 @@ import com.capgemini.bean.Customer;
 			
 			for(String key : map1.keySet())
 			{
-				Customer acc = map1.get(key);
+				
 				Account ac1 = map1.get(key);
 				if(ac1.getAccountNumber()==accountNumber)
 				{
 					ac1.setBalance(ac1.getBalance()+amount);
+					System.out.println(ac1);
 					acc1.setBalance(acc1.getBalance()-amount);
+					System.out.println(acc1);
 					return true;
+				}
+				else
+				{
+					System.out.println("No Id generated");
 				}
 			}
 			return false;
@@ -86,7 +98,7 @@ import com.capgemini.bean.Customer;
 
 		public void printTransaction() {
 			
-			System.out.println(acc1);
+			System.out.println(trans);
 
 		
 		}
